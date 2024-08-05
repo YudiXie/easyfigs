@@ -9,7 +9,7 @@ def remove_top_right_spines(ax=None):
     ax.spines['right'].set_visible(False)
 
 
-def add_errorbars(ax, data_dict):
+def add_errorbars(ax, data_dict, **kwargs):
     """
     Args:
         data_dict: dict, the data to plot,
@@ -20,15 +20,17 @@ def add_errorbars(ax, data_dict):
             'y' is the y axis data
             'error', optional, is the error bar data
             'color', optional, is the color of the points
+        kwargs: dict, additional keyword arguments for errorbar
+            will overwrite the default values
     """
     for key, value in data_dict.items():
-        ebar_kwargs = {}
+        ebar_kwargs = {'fmt': "o-", 'capsize': 3}
+        ebar_kwargs.update(kwargs)
         if 'error' in value:
             ebar_kwargs.update({'yerr': value['error']})
         if 'color' in value:
             ebar_kwargs.update({'color': value['color']})
-        ax.errorbar(value['x'], value['y'], fmt="o-", label=key,
-                    capsize=3, **ebar_kwargs)
+        ax.errorbar(value['x'], value['y'], label=key, **ebar_kwargs)
 
 
 def add_filled_lines(ax, data_dict, **kwargs):
