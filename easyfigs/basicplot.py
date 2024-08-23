@@ -94,6 +94,4 @@ def bar_groups(ax, x_axis_labels, data_dict, bar_label=True):
         if bar_label:
             ax.bar_label(rect, padding=3, fmt='%.2f')
     
-    ax.set_xticks(x_axis, x_axis_labels)
-    ax.legend()
     return x_axis, rect_list
