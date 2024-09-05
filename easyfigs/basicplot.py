@@ -18,8 +18,8 @@ def add_errorbars(ax, data_dict, **kwargs):
             they are list or array of the same length
             'x' is the x axis data
             'y' is the y axis data
-            'error', optional, is the error bar data
-            'color', optional, is the color of the points
+            'kwargs', optional, dict, additional keyword arguments for errorbar
+                such as color, alpha, etc.
         kwargs: dict, additional keyword arguments for errorbar
             will overwrite the default values
     """
@@ -28,8 +28,8 @@ def add_errorbars(ax, data_dict, **kwargs):
         ebar_kwargs.update(kwargs)
         if 'error' in value:
             ebar_kwargs.update({'yerr': value['error']})
-        if 'color' in value:
-            ebar_kwargs.update({'color': value['color']})
+        if 'kwargs' in value:
+            ebar_kwargs.update(value['kwargs'])
         ax.errorbar(value['x'], value['y'], label=key, **ebar_kwargs)
 
 
