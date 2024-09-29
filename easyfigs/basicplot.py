@@ -92,6 +92,6 @@ def bar_groups(ax, x_axis_labels, data_dict, bar_label=True):
         rect = ax.bar(x_axis + offset, value['y'], width, **kwargs)
         rect_list.append(rect)
         if bar_label:
-            ax.bar_label(rect, padding=3, fmt='%.2f')
+            ax.bar_label(rect, padding=3, fmt='%.2f', fontsize=7)
     
     return x_axis, rect_list
