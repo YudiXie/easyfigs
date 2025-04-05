@@ -60,7 +60,7 @@ def add_filled_lines(ax, data_dict, **kwargs):
                             alpha=0.2, linewidth=0.0, **fl_kwargs)
 
 
-def bar_groups(ax, x_axis_labels, data_dict, bar_label=True):
+def bar_groups(ax, x_axis_len, data_dict, bar_label=True):
     """
     make a bar plot of multiple groups of data
 
@@ -69,8 +69,8 @@ def bar_groups(ax, x_axis_labels, data_dict, bar_label=True):
             each key is the group label of a set of points
             each value is a dict with keys 'y', 'error'
             'x' is not used
-            'y' is the y axis data, shape (len(x_axis_labels), )
-            'error', optional, is the error bar data, shape (len(x_axis_labels), )
+            'y' is the y axis data, shape (x_axis_len, )
+            'error', optional, is the error bar data, shape (x_axis_len, )
             'kwargs', optional, additional keyword arguments for bar
     Returns:
         x_axis: array, the x axis data
@@ -78,11 +78,11 @@ def bar_groups(ax, x_axis_labels, data_dict, bar_label=True):
     """
     num_groups = len(data_dict.keys())
     width = 0.7 / num_groups  # the width of the bars
-    x_axis = np.arange(len(x_axis_labels))  # the label locations
+    x_axis = np.arange(x_axis_len)  # the label locations
 
     rect_list = []
     for (i, (key, value)) in enumerate(data_dict.items()):
-        assert len(value['y']) == len(x_axis_labels)
+        assert len(value['y']) == x_axis_len
         offset = i * width - ((num_groups - 1) * width / 2)
         kwargs = {'label': key, 'capsize': width * 15, 'ecolor': 'black'}
         if 'error' in value:
